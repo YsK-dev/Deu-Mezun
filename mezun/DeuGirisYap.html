@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - DEU Mezun Bilgi Sistemi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/dokuz-eylul.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/dokuz-eylul.png">
+    <link rel="apple-touch-icon" href="/assets/dokuz-eylul.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles to match the rest of the website */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        
+        /* Simple CSS dropdown for navigation menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .login-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            transform: translateY(-1.5rem) scale(0.8);
+            color: #1e40af;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            color: #6b7280;
+        }
+
+        .login-card {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-text {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        .forgot-password-link {
+            color: #dc2626;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: #b91c1c;
+            text-decoration: underline;
+        }
+
+        .new-application-link {
+            color: #059669;
+            transition: all 0.3s ease;
+        }
+
+        .new-application-link:hover {
+            color: #047857;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Top Navigation Bar -->
+    <div class="bg-gray-800 text-white py-2 text-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <!-- Left Side: Language Switcher -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <a href="mezunDeu.html" class="flex items-center hover:text-blue-300 transition-colors">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAF+SURBVHjaYvzPgAD/UNlYEUAAmuTYBgAYhIEgJJmboZgtHbaJKNK8TvozM8LIllwagEY4sIFV1UD/3swngMAaGBn/P3kCVApS7ebG8O/f/x07/n/6BFL36/f/37/+//oFZDPKygJtAAgg" 
+                                 alt="Türkçe" class="w-4 h-3 mr-1">
+                            <span>Türkçe</span>
+                        </a>
+                        <span class="text-gray-400">|</span>
+                        <a href="#" class="flex items-center hover:text-blue-300 transition-colors">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAF+SURBVHjaYvzPgAD/UNlYEUAAmuTYBgAYhIEgJJmboZgtHbaJKNK8TvozM8LIllwagEY4sIFV1UD/3swngMAaGBn/P3kCVApS7ebG8O/f/x07/n/6BFL36/f/37/+//oFZDPKygJtAAgg" 
+                                 alt="English" class="w-4 h-3 mr-1">
+                            <span>English</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side: Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="mezunDeu.html" class="hover:text-blue-300 transition-colors">Anasayfa</a>
+                    <a href="https://webmail.deu.edu.tr/ogrmail/src/login.php" target="_blank" class="flex items-center hover:text-blue-300 transition-colors">
+                        <i data-lucide="at-sign" class="w-4 h-4 mr-1"></i>
+                        E-posta
+                    </a>
+                    <a href="iletişimDeu.html" class="flex items-center hover:text-blue-300 transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 mr-1"></i>
+                        İletişim
+                    </a>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="flex items-center space-x-2">
+                        <a href="https://facebook.com/deukariyer" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://twitter.com/deu_kariyer" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://linkedin.com/showcase/deukpmi" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo - Updated to match main page -->
+                <div class="flex-shrink-0">
+                    <a href="mezunDeu.html" class="flex items-center space-x-2">
+                        <span class="text-gray-600 font-medium">
+                            <img src="/assets/mbs.png" alt="Logo" style="height: 60px; vertical-align: middle;"></span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-4">
+                    <div class="dropdown">
+                        <button class="flex items-center text-gray-600 hover:text-blue-800 focus:outline-none">
+                            <span>Menü</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="mezunKartNedir.html">Mezun Kart</a>
+                            <a href="iletişimDeu.html">İletişim</a>
+                        </div>
+                    </div>
+                    <a href="mezunDeu.html" class="text-gray-600 hover:text-blue-800">Ana Sayfa</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-blue-800 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 border-b">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <nav aria-label="breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm text-gray-500">
+                    <li><a href="mezunDeu.html" class="hover:text-blue-700">Ana Sayfa</a></li>
+                    <li><i data-lucide="chevron-right" class="w-4 h-4"></i></li>
+                    <li class="font-semibold text-gray-700" aria-current="page">Giriş Yap</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-md mx-auto">
+            <!-- Login Card -->
+            <div class="login-container login-card rounded-2xl shadow-2xl p-8 bg-white">
+                <div class="text-center mb-6">
+                    <div class="bg-blue-50 rounded-full p-4 inline-block mb-4">
+                        <img src="/assets/mbs.png" alt="DEU Logo" class="h-16 w-auto">
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">Giriş Yap</h1>
+                    <p class="text-gray-600">DEU Mezun Bilgi Sistemi</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full mt-2"></div>
+                </div>
+
+                <!-- Important Information Box -->
+                <div class="help-text p-4 rounded-lg mb-6">
+                    <div class="flex items-start space-x-3">
+                        <i data-lucide="info" class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0"></i>
+                        <div class="text-sm text-amber-800 leading-relaxed">
+                            <p class="font-semibold mb-2">Giriş Bilgileri:</p>
+                            <p class="mb-2">Mezun bilgi sistemine <strong>ilk kez giriyorsanız</strong> <code class="bg-amber-200 px-1 rounded">ad.soyad@ogr.deu.edu.tr</code> adresinizi kullanın.</p>
+                            <p class="mb-2">Daha önce kayıt olduysa <code class="bg-amber-200 px-1 rounded">ogrencino@deu.edu.tr</code> ile giriş yapınız.</p>
+                            <p>E-posta adresinizi hatırlamıyorsanız aşağıdaki bağlantıları kullanınız.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login Form -->
+                <form class="space-y-6">
+                    <!-- Email Input -->
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            placeholder=" "
+                            class="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                            required
+                        >
+                        <label for="email" class="text-gray-500 text-sm">E-posta Adresi</label>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="input-group relative">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            placeholder=" "
+                            class="w-full px-4 pt-6 pb-2 pr-12 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                            required
+                        >
+                        <label for="password" class="text-gray-500 text-sm">Şifre</label>
+                        <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600" onclick="togglePassword()">
+                            <i data-lucide="eye" id="eye-icon" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-600">Beni hatırla</span>
+                        </label>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button 
+                        type="submit" 
+                        class="btn-primary w-full py-3 px-4 text-white font-semibold rounded-lg shadow-lg flex items-center justify-center space-x-2"
+                    >
+                        <i data-lucide="log-in" class="w-5 h-5"></i>
+                        <span>Giriş Yap</span>
+                    </button>
+                </form>
+
+                <!-- Help Links -->
+                <div class="mt-8 space-y-4">
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Giriş Sorunu mu Yaşıyorsunuz?</h3>
+                        <div class="space-y-2">
+                            <a href="https://debishs.deu.edu.tr/default.aspx" class="forgot-password-link block font-medium hover:underline">
+                                <i data-lucide="key" class="w-4 h-4 inline mr-2"></i>
+                                Şifremi Unuttum
+                            </a>
+                            <a href="#" class="forgot-password-link block font-medium hover:underline">
+                                <i data-lucide="help-circle" class="w-4 h-4 inline mr-2"></i>
+                                Girişte Sorun Yaşıyorum!
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-4">
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600 mb-2">Şifre sıfırlamanıza rağmen giriş yapamıyorsanız:</p>
+                            <a href="YeniMezunBasvuru.html" class="new-application-link font-medium hover:underline">
+                                <i data-lucide="user-plus" class="w-4 h-4 inline mr-2"></i>
+                                Yeni Mezun Başvuru Sayfası
+                            </a>
+                            <p class="text-xs text-gray-500 mt-1">sayfasından mezun e-postanızı alabilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div class="flex items-start space-x-3">
+                        <i data-lucide="mail" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></i>
+                        <div class="text-sm text-blue-800">
+                            <p class="font-semibold mb-1">E-posta Formatları:</p>
+                            <ul class="list-disc list-inside space-y-1 text-xs">
+                                <li><strong>İlk giriş:</strong> ad.soyad@ogr.deu.edu.tr</li>
+                                <li><strong>Kayıtlı kullanıcı:</strong> ogrencino@deu.edu.tr</li>
+                                <li><strong>Mezun e-postası:</strong> ad.soyad@mezun.deu.edu.tr</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12 py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2025 Dokuz Eylül Üniversitesi. Tüm Hakları Saklıdır.</p>
+            <p class="text-sm">Bilgi İşlem Daire Başkanlığı tarafından geliştirilmiştir.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.setAttribute('data-lucide', 'eye');
+            }
+            
+            // Re-initialize the icon
+            lucide.createIcons();
+        }
+
+        // Form submission handler
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Basic validation
+            if (!email || !password) {
+                alert('Lütfen e-posta adresi ve şifre giriniz.');
+                return;
+            }
+            
+            // Email format validation
+            const emailPattern = /@(ogr\.deu\.edu\.tr|deu\.edu\.tr|mezun\.deu\.edu\.tr)$/;
+            if (!emailPattern.test(email)) {
+                alert('Lütfen geçerli bir DEU e-posta adresi giriniz.\n\nKabul edilen formatlar:\n• ad.soyad@ogr.deu.edu.tr\n• ogrencino@deu.edu.tr\n• ad.soyad@mezun.deu.edu.tr');
+                return;
+            }
+            
+            // Simulate login process
+            const button = document.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i><span>Giriş yapılıyor...</span>';
+            button.disabled = true;
+            
+            // Re-initialize icons for the loading spinner
+            lucide.createIcons();
+            
+            // Simulate API call
+            setTimeout(() => {
+                // For demo purposes, just redirect to main page
+                window.location.href = 'mezunDeu.html';
+            }, 2000);
+        });
+
+        // Add floating label animation on input focus
+        document.querySelectorAll('.input-group input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

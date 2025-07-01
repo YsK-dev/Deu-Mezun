@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokuz Eylül Üniversitesi Mezun Bilgi Sistemi | Bize Güç Verin, Geleceğimizi Birlikte Değiştirelim!</title>
+    
+    <link rel="icon" type="image/png" href=" /assets/dokuz-eylul.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/dokuz-eylul.png">
+    <link rel="apple-touch-icon" href="/assets/dokuz-eylul.png">
+    
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons for icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+ <style>
+    /* Custom styles */
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f0f2f5;
+    }
+    
+    /* Simple CSS dropdown for navigation menu */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #f9f9f9;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 0.5rem;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .category-section {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    }
+    .advantage-card {
+        transition: all 0.3s ease;
+    }
+    .advantage-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    /* Social Media Cards */
+    .social-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .social-card:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Animation for social icons */
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .social-card:hover .w-16.h-16 {
+        animation: pulse 2s infinite;
+    }
+
+    /* Hero Slider Styles */
+    .hero-slider {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+
+    .slide-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+    }
+
+    .slide-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        z-index: 10;
+    }
+
+    .slider-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        cursor: pointer;
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        z-index: 20;
+    }
+
+    .slider-nav:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .slider-nav.prev {
+        left: 20px;
+    }
+
+    .slider-nav.next {
+        right: 20px;
+    }
+
+    .slider-dots {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 20;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .dot.active {
+        background: white;
+        transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+        .slider-nav {
+            padding: 8px 12px;
+        }
+        
+        .slider-nav.prev {
+            left: 10px;
+        }
+        
+        .slider-nav.next {
+            right: 10px;
+        }
+        
+        .slide-content h1 {
+            font-size: 1.5rem;
+        }
+        
+        .slide-content p {
+            font-size: 0.875rem;
+        }
+    }
+</style>
+
+</head>
+<body class="bg-gray-100">
+     <!-- Top Navigation Bar -->
+    <div class="bg-gray-800 text-white py-2 text-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <!-- Left Side: Language Switcher -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <a href="mezunDeu.html" class="flex items-center hover:text-blue-300 transition-colors">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAF+SURBVHjaYvzPgAD/UNlYEUAAmuTYBgAYhIEgJJmboZgtHbaJKNK8TvozM8LIllwagEY4sIFV1UD/3swngMAaGBn/P3kCVApS7ebG8O/f/x07/n/6BFL36/f/37/+//oFZDPKygJtAAggkIb/YINBqqOjGUxNQeqUlf93dIDV/QLpAWtg+P0bqAEggJhA7gaqBtqoqMjg5PR/+vT/SUn/N2z4//Xr/+XL//Pwgu2BWgJUCxBATCAn/fgJEnVx/Q+05NgxkNzp0/9XrPgvJPR/zZr/ZmZQDX/+AE0HCCCQhv9//4D89OQxMMT+a2uDnKGm9v/SJZCrHj36v28fRAPESQABxALEjGBLGRYv/s/H97+oCOQYIIiM/P/ly/9Fi6CO+QMy9A8DA0AAgTQwg4MMaMD/rq7/vr7/WVlBrv/8GeROiAf+ADWAQgXoHIAAAmlg+v+fQVISbMxfhpMngToZhYUZ+PkZwAaDEDgMgQioGCCAGL+iRiSeOIYAgAADAO/XO1xGA79vAAAAAElFTkSuQmCC" 
+                                 alt="Türkçe" class="w-4 h-3 mr-1">
+                            <span>Türkçe</span>
+                        </a>
+                        <span class="text-gray-400">|</span>
+                        <a href="#" class="flex items-center hover:text-blue-300 transition-colors opacity-70">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAflJREFUeNpinDRzn5qN3uFDt16+YWBg+Pv339+KGN0rbVP+//2rW5tf0Hfy/2+mr99+yKpyOl3Ydt8njEWIn8f9zj639NC7j78eP//8739GVUUhNUNuhl8//ysKeZrJ/v7z10Zb2PTQTIY1XZO2Xmfad+f7XgkXxuUrVB6cjPVXef78JyMjA8PFuwyX7gAZj97+T2e9o3d4BWNp84K1NzubTjAB3fH0+fv6N3qP/ir9bW6ozNQCijB8/8zw/TuQ7r4/ndvN5mZgkpPXiis3Pv34+ZPh5t23//79Rwehof/9/NDEgMrOXHvJcrllgpoRN8PFOwy/fzP8+gUlgZI/f/5xcPj/69e/37//AUX+/mXRkN555gsOG2xt/5hZQMwF4r9///75++f3nz8nr75gSms82jfvQnT6zqvXPjC8e/srJQHo9P9fvwNtAHmG4f8zZ6dDc3bIyM2LTNlsbtfM9OPHH3FhtqUz3eXX9H+cOy9ZMB2o6t/Pn0DHMPz/b+2wXGTvPlPGFxdcD+mZyjP8+8MUE6sa7a/xo6Pykn1s4zdzIZ6///8zMGpKM2pKAB0jqy4UE7/msKat6Jw5mafrsxNtWZ6/fjvNLW29qv25pQd///n+5+/fxDDVbcc//P/zx/36m5Ub9zL8+7t66yEROcHK7q5bldMBAgwADcRBCuVLfoEAAAAASUVORK5CYII=" 
+                                 alt="English" class="w-4 h-3 mr-1">
+                            <span>English</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side: Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="mezunDeu.html" class="hover:text-blue-300 transition-colors">Anasayfa</a>
+                    <a href="https://webmail.deu.edu.tr/ogrmail/src/login.php" target="_blank" class="flex items-center hover:text-blue-300 transition-colors">
+                        <i data-lucide="at-sign" class="w-4 h-4 mr-1"></i>
+                        E-posta
+                    </a>
+                    <a href="iletişimDeu.html" class="flex items-center hover:text-blue-300 transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 mr-1"></i>
+                        İletişim
+                    </a>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="flex items-center space-x-2">
+                        <a href="https://facebook.com/deukariyer" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://twitter.com/deu_kariyer" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://linkedin.com/showcase/deukpmi" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+       <!-- Header Section -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo - Updated to match main page -->
+                <div class="flex-shrink-0">
+                    <a href="mezunDeu.html" class="flex items-center space-x-2">
+                        <span class="text-gray-600 font-medium">
+                            <img src="/assets/mbs.png" alt="Logo" style="height: 60px; vertical-align: middle;"></span>
+                    </a>
+                </div>
+
+                <!-- Search Bar (Desktop) -->
+                <div class="hidden md:flex flex-1 max-w-lg mx-8">
+                    <div class="relative w-full">
+                        <input 
+                            type="text" 
+                            placeholder="Mezun ara, duyuru ara..." 
+                            class="w-full px-4 py-2 pl-10 pr-4 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            id="search-input"
+                        >
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                        </div>
+                        <button class="absolute inset-y-0 right-0 flex items-center pr-3">
+                            <i data-lucide="x" class="w-5 h-5 text-gray-400 hidden" id="clear-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                  <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-4">
+                    <div class="dropdown">
+                        <button class="flex items-center text-gray-600 hover:text-blue-800 focus:outline-none">
+                            <span data-tr="Menü" data-en="Menu">Menü</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                        </button>
+
+                        <div class="dropdown-content">
+                            <a href="mezunKartNedir.html" data-tr="Mezun Kart" data-en="Alumni Card">Mezun Kart</a>
+                             <a href="iletişimDeu.html">İletişim</a>
+                        </div>
+                    </div>
+                    <a href="login.html" class="text-gray-600 hover:text-blue-800" data-tr="Giriş Yap" data-en="Login">Giriş Yap</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button class="text-gray-600 hover:text-blue-800 focus:outline-none" id="mobile-search-toggle">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                    </button>
+                    <button class="text-gray-600 hover:text-blue-800 focus:outline-none" id="mobile-menu-toggle">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Search Bar -->
+            <div class="md:hidden border-t border-gray-200 px-4 py-3 hidden" id="mobile-search-bar">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        placeholder="Mezun ara, duyuru ara..." 
+                        data-placeholder-tr="Mezun ara, duyuru ara..." 
+                        data-placeholder-en="Search alumni, announcements..."
+                        class="w-full px-4 py-2 pl-10 pr-4 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="mobile-search-input"
+                    >
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="md:hidden border-t border-gray-200 px-4 py-3 hidden" id="mobile-menu">
+                <div class="space-y-3">
+                    <a href="mezunDeu.html" class="block text-gray-600 hover:text-blue-800" data-tr="Anasayfa" data-en="Home">Anasayfa</a>
+                    <a href="mezunKartNedir.html" class="block text-gray-600 hover:text-blue-800" data-tr="Mezun Kart" data-en="Alumni Card">Mezun Kart</a>
+                    <a href="login.html" class="block text-gray-600 hover:text-blue-800" data-tr="Giriş Yap" data-en="Login">Giriş Yap</a>
+                    <a href="iletişimDeu.html" class="block text-gray-600 hover:text-blue-800" data-tr="İletişim" data-en="Contact">İletişim</a>
+                    <a href="https://webmail.deu.edu.tr/ogrmail/src/login.php" target="_blank" class="block text-gray-600 hover:text-blue-800" data-tr="E-posta" data-en="E-mail">E-posta</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Search Bar -->
+            <div class="md:hidden border-t border-gray-200 px-4 py-3 hidden" id="mobile-search-bar">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        placeholder="Mezun ara, duyuru ara..." 
+                        class="w-full px-4 py-2 pl-10 pr-4 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        id="mobile-search-input"
+                    >
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <main>
+        <!-- Hero Slider Section -->
+        <section class="hero-slider relative h-[50vh] md:h-[60vh]">
+            <!-- Slide 1 -->
+            <div class="slide active" style="background-image: url('/deuMezunFoto/image copy.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4">Dokuz Eylül Üniversitesi</h1>
+                        <p class="text-lg md:text-xl text-gray-200">Mezun Bilgi Sistemi'ne Hoş Geldiniz</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" style="background-image: url('/deuMezunFoto/image copy 2.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4">280.000+ Mezun</h1>
+                        <p class="text-lg md:text-xl text-gray-200">Güçlü mezun ağımızın bir parçası olun</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" style="background-image: url('/deuMezunFoto/image.png');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4">DEÜ Mezun Kartı</h1>
+                        <p class="text-lg md:text-xl text-gray-200">Kampüs imkanlarından faydalanmaya devam edin</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="slider-nav prev" onclick="changeSlide(-1)">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button class="slider-nav next" onclick="changeSlide(1)">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Dots Navigation -->
+            <div class="slider-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+
+ 
+
+
+        <!-- Main Content Area -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Column: Announcements -->
+                <div class="lg:col-span-2 space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2">Duyurular</h2>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">YENİ MEZUNLARIMIZIN DİKKATİNE</h3>
+                        <p class="text-gray-600">Mezuniyet işlemlerinizi tamamladıktan sonra mezun kartı başvurusu yapmayı unutmayınız. Kartınızla kampüs olanaklarından faydalanmaya devam edebilirsiniz.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">MEZUNLARIMIZIN DİKKATİNE</h3>
+                        <p class="text-gray-600">İletişim bilgilerinizi güncelleyerek dernek duyurularını, iş ilanlarını ve etkinlik davetlerini kaçırmayın.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">2000 YILI VE ÖNCESİ MEZUNLARIMIZIN DİKKATİNE</h3>
+                        <p class="text-gray-600">Sisteme kayıtlı olmayan eski mezunlarımızın, bilgilerini güncellemeleri için öğrenci işleriyle iletişime geçmeleri gerekmektedir.</p>
+                    </div>
+
+                    <div class="text-center mt-6">
+                        <a href="#" class="bg-gray-700 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition duration-300">Tüm Duyuruları Görüntüle</a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Gmail Login -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" alt="Gmail Logo" class="w-16 h-auto mx-auto mb-4">
+                        <p class="text-gray-700 font-medium mb-1">@mezun.deu.edu.tr uzantılı adresinizi kullanın.</p>
+                        <p class="text-sm text-gray-500 mb-4">Üniversitemizin sağladığı e-posta hizmetinden faydalanın.</p>
+                        <a href="https://mezun.deu.edu.tr/assests/uploads/2023/11/yonlendirme_kilavuz.pdf" class="w-full bg-red-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-700 transition duration-300 inline-block">
+                           Gmail hesabınıza gidin
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Welcome Section (Moved) -->
+            <section class="mt-12 bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Değerli Mezunumuz,</h1>
+                <p class="text-base md:text-lg text-gray-600">
+
+Dokuz Eylül Üniversitesi, güçlü kurumsal kökleri ve değişime açık dinamik yapısıyla, eğitim, araştırma ve toplumsal hizmet alanlarında öncü bir kurumdur.
+
+Eğitim programlarını, dijital dönüşümü de dikkate alarak sürekli geliştiren Üniversitemiz, öğrenci merkezli eğitim politikası ile farklı disiplinlerde yetkin mezunlar vermekte, milli ve manevi değerlerinden güç alan çağdaş insanlar yetiştirmektedir. Bu kapsamda, kariyer gelişimini destekleyici çalışmalar yapmakta, öğrenci ve mezunlarına istihdam fırsatları sunmaktadır.
+
+Araştırma Üniversitesi kimliği ile Dokuz Eylül Üniversitesi, 2023 vizyonu doğrultusunda, merkezleri ve teknoparkları ile yüksek katma değerli bilimsel çıktılar üreterek, Ar-Ge ve girişimcilik ekosisteminin gelişmesine katkı verirken, toplumsal sürdürülebilirliği sağlamak için sosyal sorumluluk ve çevreye duyarlılık stratejileri çerçevesinde projeler geliştirmekte ve yüksek kalite standartlarında hizmetler sunmaktadır.
+
+Dokuz Eylül Üniversitesi, kurulduğu 1982 yılından bugüne, 280.000’in üzerinde mezun vermiştir. Mezunlarımız, toplumsal, ekonomik, siyasi ve bilimsel alanlarda başarılara imza atarak ülkemizin gelişmesinde örnek olmuşlardır.
+
+Üniversitemizin gelecek vizyonunu sizlerle birlikte şekillendirmek ve mezunlarımızla kurduğumuz iletişim ve işbirliğini daha ileriye taşımak üzere, sizi de etkin mezun ağımızın bir üyesi olmaya davet ediyoruz. Geliştirmekte olduğumuz yeni mezun bilgi sisteminin bir parçası olan ‘mezun bilgi formunu’ doldurarak atacağınız bu ilk adımın ardından sizler ile etkileşimimizin sürekliliğini sağlayabilecek ve Üniversitemizi hep birlikte geleceğe taşıyacağız.
+
+ 
+                </p>
+            </section>
+
+            <!-- Informational Banners & Links Section -->
+            <section class="mt-12 space-y-6">
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg" role="alert">
+                    <p class="font-bold">Önemli Bilgilendirme</p>
+                    <p>Mezun kartı başvuruları ve yenileme işlemleri yalnızca bu sistem üzerinden online olarak yapılmaktadır.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <a href="mezunKartNedir.html" class="block bg-white p-8 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200">
+                        <i data-lucide="help-circle" class="mx-auto w-12 h-12 text-blue-600 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-800">DEÜ Mezun Kart Nedir?</h3>
+                <a href="mezunKartNedir.html#nasil-alinir" class="block bg-white p-8 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200">
+                       <i data-lucide="user-check" class="mx-auto w-12 h-12 text-blue-600 mb-4"></i>
+                    Nasıl Sahip Olabilirsiniz?
+                </a>
+                    <a href="DeuMezunkartAvantaj.html" class="block bg-white p-8 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200">
+                        <i data-lucide="gift" class="mx-auto w-12 h-12 text-blue-600 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-800">Mezun Kart Avantajları</h3>
+                    </a>
+
+                </div>
+            </section>
+
+
+
+
+            <!-- Alumni Card Images -->
+            <section class="mt-12" id="mezun-kart-section">
+                <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Mezun Kart Örneği</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                    <a href="mezunKartNedir.html" class="transform hover:scale-105 transition-transform duration-300">
+                        <img src="/assets/Screenshot 2025-06-30 at 13.25.45.png" alt="Alumni Card Front" class="rounded-lg shadow-lg hover:shadow-xl">
+                    </a>
+                    <a href="mezunKartNedir.html" class="transform hover:scale-105 transition-transform duration-300">
+                        <img src="/assets/Screenshot 2025-06-30 at 13.26.03.png" alt="Alumni Card Back" class="rounded-lg shadow-lg hover:shadow-xl">
+                    </a>
+                </div>
+                <div class="text-center mt-6">
+                                        <a href="#" id="faq-toggle-card" class="cursor-pointer block bg-white p-8 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-200">
+                        <i data-lucide="star" class="mx-auto w-12 h-12 text-blue-600 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-800">Sık Sorulan Sorular</h3>
+                    </a>
+    
+                </div>
+            </section>
+                        <!-- Sık Sorulan Sorular (Accordion) Section -->
+            <section class="mt-8 hidden" id="faq-section">
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <!-- Soru 1 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <button class="accordion-header flex justify-between items-center w-full p-5 font-semibold text-left text-gray-800 focus:outline-none">
+                            <span class="text-lg">Mezun Kartımı nasıl alabilirim?</span>
+                            <i data-lucide="chevron-down" class="accordion-icon w-6 h-6 transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="p-5 pt-0 text-gray-600">
+                                Mezun kartı başvurunuzu Mezun Bilgi Sistemi üzerinden online olarak yapabilirsiniz. Sisteme giriş yaptıktan sonra "Mezun Kart Başvurusu" menüsünü takip ederek adımları tamamlayabilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Soru 2 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <button class="accordion-header flex justify-between items-center w-full p-5 font-semibold text-left text-gray-800 focus:outline-none">
+                            <span class="text-lg">Kart ücreti ne kadar?</span>
+                            <i data-lucide="chevron-down" class="accordion-icon w-6 h-6 transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="p-5 pt-0 text-gray-600">
+                                Mezun kartı için güncel ücret bilgisine ve ödeme yöntemlerine başvuru ekranından ulaşabilirsiniz. Ücretler dönemsel olarak güncellenebilmektedir.
+                            </p>
+                        </div>
+                    </div>
+                     <!-- Soru 3 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <button class="accordion-header flex justify-between items-center w-full p-5 font-semibold text-left text-gray-800 focus:outline-none">
+                            <span class="text-lg">Kartımı kaybettim, ne yapmalıyım?</span>
+                            <i data-lucide="chevron-down" class="accordion-icon w-6 h-6 transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="p-5 pt-0 text-gray-600">
+                               Kartınızı kaybetmeniz durumunda, sistem üzerinden tekrar başvuru yaparak yeni kart talebinde bulunabilirsiniz. Kayıp kart işlemleri için ek bir ücret uygulanabilir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+
+
+             <!-- Social Media Section -->
+            <section class="mt-12">
+                <div class="bg-gradient-to-r from-blue-800 to-blue-900 text-white rounded-lg p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold mb-4">Sosyal Medyada Bizi Takip Edin</h2>
+                        <p class="text-blue-200 text-lg">
+                            DEÜ Mezun topluluğuna katılın, güncel haberler ve etkinliklerden haberdar olun
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-4xl mx-auto">
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/deuofficial/" target="_blank" 
+                           class="social-card bg-white/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="instagram" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Instagram</h3>
+                        </a>
+
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/deuofficial" target="_blank" 
+                           class="social-card bg-white/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="facebook" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Facebook</h3>
+                        </a>
+
+                        <!-- Twitter/X -->
+                        <a href="https://twitter.com/deuofficial" target="_blank" 
+                           class="social-card bg-white/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="twitter" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Twitter</h3>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/school/dokuz-eyl%C3%BCl-%C3%BCniversitesi/" target="_blank" 
+                           class="social-card bg-white/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="linkedin" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">LinkedIn</h3>
+                        </a>
+
+                        <!-- YouTube -->
+                        <a href="https://www.youtube.com/c/DokuzEylulUniversitesi" target="_blank" 
+                           class="social-card bg-white/10 backdrop-blur-sm p-6 rounded-lg text-center hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="youtube" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">YouTube</h3>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12 py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2025 Dokuz Eylül Üniversitesi. Tüm Hakları Saklıdır.</p>
+            <p class="text-sm">Bilgi İşlem Daire Başkanlığı tarafından geliştirilmiştir.</p>
+        </div>
+    </footer>
+
+     <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+             // Hero Slider Functionality
+        let slideIndex = 1;
+        let slideTimer;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex += n;
+            showSlide(slideIndex);
+            autoSlide();
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlide(slideIndex);
+            autoSlide();
+        }
+
+        function autoSlide() {
+            slideTimer = setTimeout(() => {
+                slideIndex++;
+                showSlide(slideIndex);
+                autoSlide();
+            }, 5000); // Change slide every 5 seconds
+        }
+
+        // Start auto-sliding when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            autoSlide();
+        });
+
+        // Pause auto-slide on hover
+        const sliderSection = document.querySelector('.hero-slider');
+        if (sliderSection) {
+            sliderSection.addEventListener('mouseenter', () => {
+                clearTimeout(slideTimer);
+            });
+            
+            sliderSection.addEventListener('mouseleave', () => {
+                autoSlide();
+            });}
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const mobileSearchInput = document.getElementById('mobile-search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const mobileSearchToggle = document.getElementById('mobile-search-toggle');
+        const mobileSearchBar = document.getElementById('mobile-search-bar');
+
+        // Desktop search functionality
+        if (searchInput && clearSearchBtn) {
+            searchInput.addEventListener('input', function() {
+                if (this.value.length > 0) {
+                    clearSearchBtn.classList.remove('hidden');
+                } else {
+                    clearSearchBtn.classList.add('hidden');
+                }
+                performSearch(this.value);
+            });
+
+            clearSearchBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                this.classList.add('hidden');
+                performSearch('');
+            });
+        }
+
+        // Mobile search toggle
+        if (mobileSearchToggle && mobileSearchBar) {
+            mobileSearchToggle.addEventListener('click', function() {
+                mobileSearchBar.classList.toggle('hidden');
+                if (!mobileSearchBar.classList.contains('hidden')) {
+                    mobileSearchInput.focus();
+                }
+            });
+        }
+
+        // Mobile search functionality
+        if (mobileSearchInput) {
+            mobileSearchInput.addEventListener('input', function() {
+                performSearch(this.value);
+            });
+        }
+
+        // Search function
+        function performSearch(query) {
+            const searchTerm = query.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all content when search is empty
+                showAllContent();
+                return;
+            }
+
+            // Get all searchable elements
+            const announcements = document.querySelectorAll('.lg\\:col-span-2 .bg-white');
+            const infoCards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 a');
+            const faqItems = document.querySelectorAll('.accordion-header');
+
+            let hasResults = false;
+
+            // Search in announcements
+            announcements.forEach(announcement => {
+                const title = announcement.querySelector('h3')?.textContent.toLowerCase() || '';
+                const content = announcement.querySelector('p')?.textContent.toLowerCase() || '';
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    announcement.style.display = 'block';
+                    highlightText(announcement, searchTerm);
+                    hasResults = true;
+                } else {
+                    announcement.style.display = 'none';
+                }
+            });
+
+            // Search in info cards
+            infoCards.forEach(card => {
+                const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    highlightText(card, searchTerm);
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Search in FAQ items
+            faqItems.forEach(faqItem => {
+                const question = faqItem.querySelector('span')?.textContent.toLowerCase() || '';
+                const answer = faqItem.nextElementSibling?.textContent.toLowerCase() || '';
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    faqItem.parentElement.style.display = 'block';
+                    highlightText(faqItem.parentElement, searchTerm);
+                    // Show FAQ section if hidden
+                    document.getElementById('faq-section')?.classList.remove('hidden');
+                    hasResults = true;
+                } else {
+                    faqItem.parentElement.style.display = 'none';
+                }
+            });
+
+            // Show no results message if needed
+            showNoResultsMessage(!hasResults, searchTerm);
+        }
+
+        function highlightText(element, searchTerm) {
+            // Simple text highlighting - you can enhance this further
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+
+            textNodes.forEach(textNode => {
+                const text = textNode.textContent;
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                if (regex.test(text)) {
+                    const highlightedText = text.replace(regex, '<mark class="bg-yellow-200">$1</mark>');
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = highlightedText;
+                    textNode.parentNode.replaceChild(wrapper, textNode);
+                }
+            });
+        }
+
+        function showAllContent() {
+            // Show all announcements
+            document.querySelectorAll('.lg\\:col-span-2 .bg-white').forEach(el => {
+                el.style.display = 'block';
+            });
+
+            // Show all info cards
+            document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 a').forEach(el => {
+                el.style.display = 'block';
+            });
+
+            // Show all FAQ items
+            document.querySelectorAll('.accordion-header').forEach(el => {
+                el.parentElement.style.display = 'block';
+            });
+
+            // Remove highlights
+            document.querySelectorAll('mark').forEach(mark => {
+                mark.outerHTML = mark.innerHTML;
+            });
+
+            // Hide no results message
+            const noResultsMsg = document.getElementById('no-results-message');
+            if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        function showNoResultsMessage(show, searchTerm) {
+            const existingMsg = document.getElementById('no-results-message');
+            
+            if (existingMsg) {
+                existingMsg.remove();
+            }
+
+            if (show) {
+                const noResultsDiv = document.createElement('div');
+                noResultsDiv.id = 'no-results-message';
+                noResultsDiv.className = 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg mt-6';
+                noResultsDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <i data-lucide="search-x" class="w-5 h-5 mr-3"></i>
+                        <div>
+                            <p class="font-semibold">Arama sonucu bulunamadı</p>
+                            <p class="text-sm">"${searchTerm}" için sonuç bulunamadı. Farklı anahtar kelimeler deneyiniz.</p>
+                        </div>
+                    </div>
+                `;
+                
+                const mainContent = document.querySelector('.container.mx-auto.px-4.sm\\:px-6.lg\\:px-8.py-12');
+                mainContent.appendChild(noResultsDiv);
+                
+                // Re-initialize icons for the new element
+                lucide.createIcons();
+            }
+        }
+
+        // Accordion functionality for questions inside the FAQ section
+        const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener("click", () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.accordion-icon');
+
+                icon.classList.toggle('rotate-180');
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        });
+        
+        // Toggle visibility of the entire FAQ section when the star card is clicked
+        const faqToggleCard = document.getElementById('faq-toggle-card');
+        const faqSection = document.getElementById('faq-section');
+
+        faqToggleCard.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            faqSection.classList.toggle('hidden');
+
+            // Optional: Scroll to the FAQ section when it becomes visible
+            if (!faqSection.classList.contains('hidden')) {
+                faqSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    </script>
+    
+
+</body>
+</html>

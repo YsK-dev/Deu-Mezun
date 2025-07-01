@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Mezun Başvuru - DEU Mezun Bilgi Sistemi</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/dokuz-eylul.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/dokuz-eylul.png">
+    <link rel="apple-touch-icon" href="/assets/dokuz-eylul.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        
+        /* Simple CSS dropdown for navigation menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .form-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            transform: translateY(-1.5rem) scale(0.8);
+            color: #1e40af;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            color: #6b7280;
+        }
+
+        .form-card {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+            border-left: 4px solid #0277bd;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        .readonly-input {
+            background-color: #f3f4f6 !important;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+  <!-- Top Navigation Bar -->
+    <div class="bg-gray-800 text-white py-2 text-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <!-- Left Side: Language Switcher -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <a href="YeniMezunBasvuru.html" class="flex items-center hover:text-blue-300 transition-colors">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAF+SURBVHjaYvzPgAD/UNlYEUAAmuTYBgAYhIEgJJmboZgtHbaJKNK8TvozM8LIllwagEY4sIFV1UD/3swngMAaGBn/P3kCVApS7ebG8O/f/x07/n/6BFL36/f/37/+//oFZDPKygJtAAggkIb/YINBqqOjGUxNQeqUlf93dIDV/QLpAWtg+P0bqAEggJhA7gaqBtqoqMjg5PR/+vT/SUn/N2z4//Xr/+XL//Pwgu2BWgJUCxBATCAn/fgJEnVx/Q+05NgxkNzp0/9XrPgvJPR/zZr/ZmZQDX/+AE0HCCCQhv9//4D89OQxMMT+a2uDnKGm9v/SJZCrHj36v28fRAPESQABxALEjGBLGRYv/s/H97+oCOQYIIiM/P/ly/9Fi6CO+QMy9A8DA0AAgTQwg4MMaMD/rq7/vr7/WVlBrv/8GeROiAf+ADWAQgXoHIAAAmlg+v+fQVISbMxfhpMngToZhYUZ+PkZwAaDEDgMgQioGCCAGL+iRiSeOIYAgAADAO/XO1xGA79vAAAAAElFTkSuQmCC" 
+                                 alt="Türkçe" class="w-4 h-3 mr-1">
+                            <span>Türkçe</span>
+                        </a>
+                        <span class="text-gray-400">|</span>
+                        <a href="#" class="flex items-center hover:text-blue-300 transition-colors opacity-70">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAflJREFUeNpinDRzn5qN3uFDt16+YWBg+Pv339+KGN0rbVP+//2rW5tf0Hfy/2+mr99+yKpyOl3Ydt8njEWIn8f9zj639NC7j78eP//8739GVUUhNUNuhl8//ysKeZrJ/v7z10Zb2PTQTIY1XZO2Xmfad+f7XgkXxuUrVB6cjPVXef78JyMjA8PFuwyX7gAZj97+T2e9o3d4BWNp84K1NzubTjAB3fH0+fv6N3qP/ir9bW6ozNQCijB8/8zw/TuQ7r4/ndvN5mZgkpPXiis3Pv34+ZPh5t23//79Rwehof/9/NDEgMrOXHvJcrllgpoRN8PFOwy/fzP8+gUlgZI/f/5xcPj/69e/37//AUX+/mXRkN555gsOG2xt/5hZQMwF4r9///75++f3nz8nr75gSms82jfvQnT6zqvXPjC8e/srJQHo9P9fvwNtAHmG4f8zZ6dDc3bIyM2LTNlsbtfM9OPHH3FhtqUz3eXX9H+cOy9ZMB2o6t/Pn0DHMPz/b+2wXGTvPlPGFxdcD+mZyjP8+8MUE6sa7a/xo6Pykn1s4zdzIZ6///8zMGpKM2pKAB0jqy4UE7/msKat6Jw5mafrsxNtWZ6/fjvNLW29qv25pQd///n+5+/fxDDVbcc//P/zx/36m5Ub9zL8+7t66yEROcHK7q5bldMBAgwADcRBCuVLfoEAAAAASUVORK5CYII=" 
+                                 alt="English" class="w-4 h-3 mr-1">
+                            <span>English</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side: Navigation Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="mezunDeu.html" class="hover:text-blue-300 transition-colors">Anasayfa</a>
+                    <a href="https://webmail.deu.edu.tr/ogrmail/src/login.php" target="_blank" class="flex items-center hover:text-blue-300 transition-colors">
+                        <i data-lucide="at-sign" class="w-4 h-4 mr-1"></i>
+                        E-posta
+                    </a>
+                    <a href="iletişimDeu.html" class="flex items-center hover:text-blue-300 transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 mr-1"></i>
+                        İletişim
+                    </a>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="flex items-center space-x-2">
+                        <a href="https://facebook.com/deukariyer" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://twitter.com/deu_kariyer" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://linkedin.com/showcase/deukpmi" target="_blank" class="hover:text-blue-300 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="mezunDeu.html" class="flex items-center space-x-2">
+                        <span class="text-gray-600 font-medium">
+                            <img src="/assets/mbs.png" alt="Logo" style="height: 60px; vertical-align: middle;">
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-4">
+                    <div class="dropdown">
+                        <button class="flex items-center text-gray-600 hover:text-blue-800 focus:outline-none">
+                            <span>Menü</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="mezunKartNedir.html">Mezun Kart</a>
+                            <a href="DeuMezunkartAvantaj.html">Mezun Kart Avantajları</a>
+                            <a href="iletişimDeu.html">İletişim</a>
+                        </div>
+                    </div>
+                    <a href="mezunDeu.html" class="text-gray-600 hover:text-blue-800">Ana Sayfa</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-blue-800 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 border-b">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <nav aria-label="breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm text-gray-500">
+                    <li><a href="mezunDeu.html" class="hover:text-blue-700">Ana Sayfa</a></li>
+                    <li><i data-lucide="chevron-right" class="w-4 h-4"></i></li>
+                    <li class="font-semibold text-gray-700" aria-current="page">Yeni Mezun Başvuru</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-2xl mx-auto">
+            <!-- Form Card -->
+            <div class="form-container form-card rounded-2xl shadow-2xl p-8 bg-white">
+                <div class="text-center mb-8">
+                    <div class="bg-blue-50 rounded-full p-4 inline-block mb-4">
+                        <img src="/assets/mbs.png" alt="DEU Logo" class="h-16 w-auto">
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">Yeni Mezun Başvuru</h1>
+                    <p class="text-gray-600">DEU Mezun Bilgi Sistemi</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full mt-2"></div>
+                </div>
+
+                <!-- Information Box -->
+                <div class="info-box p-4 rounded-lg mb-6">
+                    <div class="flex items-start space-x-3">
+                        <i data-lucide="info" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></i>
+                        <div class="text-sm text-blue-800 leading-relaxed">
+                            <p class="font-semibold mb-2">Mezun E-posta Alma İşlemi:</p>
+                            <p class="mb-2">Mezun bilgi sistemine giriş yapabilmek için mezun e-posta adresinizi almak üzere aşağıdaki bilgileri doldurunuz.</p>
+                            <p>Diploma numaranız belirttiğiniz e-posta adresine gönderilecektir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application Form -->
+                <form class="space-y-6" onsubmit="return kontrol();">
+                    <!-- TC No Input -->
+                    <div class="input-group">
+                        <input 
+                            type="number" 
+                            id="tcno" 
+                            name="tcno"
+                            placeholder=" "
+                            class="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                            required
+                        >
+                        <label for="tcno" class="text-gray-500 text-sm">TC Kimlik No</label>
+                    </div>
+
+                    <!-- Birth Date Input -->
+                    <div class="space-y-2">
+                        <label for="dogum" class="block text-sm font-medium text-gray-700">Doğum Tarihi</label>
+                        <input 
+                            type="date" 
+                            id="dogum" 
+                            name="dogum"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                            required
+                        >
+                    </div>
+
+                    <!-- Serial Number Input -->
+                    <div class="space-y-2">
+                        <label for="seri" class="block text-sm font-medium text-gray-700">Seri No</label>
+                        <input 
+                            type="text" 
+                            id="seri" 
+                            name="seri"
+                            placeholder="Ör: A35183874"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                            required
+                        >
+                        <div class="flex items-center space-x-4 text-xs text-blue-600">
+                            <a href="https://mezun.deu.edu.tr/assests/uploads/2023/03/eski-kimlik.jpg" target="_blank" class="underline hover:text-blue-800">
+                                <i data-lucide="external-link" class="w-3 h-3 inline mr-1"></i>
+                                Eski Kimlik Örneği
+                            </a>
+                            <a href="https://mezun.deu.edu.tr/assests/uploads/2023/03/yeni-kimlik.jpg" target="_blank" class="underline hover:text-blue-800">
+                                <i data-lucide="external-link" class="w-3 h-3 inline mr-1"></i>
+                                Yeni Kimlik Örneği
+                            </a>
+                        </div>
+                        <p class="text-xs text-amber-600">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 inline mr-1"></i>
+                            Eski kimlik kullanıyorsanız lütfen seri ve no alanlarını bitişik olarak giriniz.
+                        </p>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            placeholder=" "
+                            class="w-full px-4 pt-6 pb-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                            required
+                        >
+                        <label for="email" class="text-gray-500 text-sm">İletişim E-posta</label>
+                        <p class="text-xs text-gray-500 mt-1">Diploma numaranız bu e-posta adresine gönderilecektir.</p>
+                    </div>
+
+                    <!-- Auto-filled fields -->
+                    <div class="bg-gray-50 p-4 rounded-lg space-y-4">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3">
+                            <i data-lucide="user-check" class="w-4 h-4 inline mr-2"></i>
+                            Otomatik Doldurulacak Alanlar
+                        </h3>
+                        
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="adi" 
+                                name="adi"
+                                placeholder=" "
+                                class="w-full px-4 pt-6 pb-2 border-2 border-gray-200 rounded-lg readonly-input"
+                                readonly
+                            >
+                            <label for="adi" class="text-gray-400 text-sm">Ad</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="soyadi" 
+                                name="soyadi"
+                                placeholder=" "
+                                class="w-full px-4 pt-6 pb-2 border-2 border-gray-200 rounded-lg readonly-input"
+                                readonly
+                            >
+                            <label for="soyadi" class="text-gray-400 text-sm">Soyad</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="dogum_yeri" 
+                                name="dogum_yeri"
+                                placeholder=" "
+                                class="w-full px-4 pt-6 pb-2 border-2 border-gray-200 rounded-lg readonly-input"
+                                readonly
+                            >
+                            <label for="dogum_yeri" class="text-gray-400 text-sm">Doğum Yeri</label>
+                        </div>
+                        
+                        <p class="text-xs text-gray-500">Bu alanlar kimlik bilgilerinize göre otomatik olarak doldurulacaktır.</p>
+                    </div>
+
+                    <!-- KVKK Information -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></i>
+                            <div class="text-sm">
+                                <p class="text-blue-800 mb-2">
+                                    <a href="https://acikriza.deu.edu.tr/?aref=9AB92B82-0F44-4680-B3B9-AD3D76D3D1B2" 
+                                       target="_blank" 
+                                       class="font-medium underline hover:text-blue-900">
+                                        MEZUN BİLGİ SİSTEMİ ALTERNATİF GİRİŞ BAŞVURUCUSU AYDINLATMA METNİ İÇİN TIKLAYINIZ
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hidden fields -->
+                    <input type="hidden" id="bos" name="bos">
+                    <input type="hidden" id="bos2" name="bos2">
+                    <input type="hidden" id="gecerli" name="gecerli">
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        id="submit"
+                        name="submit"
+                        class="btn-primary w-full py-3 px-4 text-white font-semibold rounded-lg shadow-lg flex items-center justify-center space-x-2"
+                    >
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                        <span>SORGULA</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12 py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2025 Dokuz Eylül Üniversitesi. Tüm Hakları Saklıdır.</p>
+            <p class="text-sm">Bilgi İşlem Daire Başkanlığı tarafından geliştirilmiştir.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Form validation function
+        function kontrol() {
+            var deger = document.getElementById("tcno").value;
+            var deger2 = document.getElementById("bos").value;
+            var deger3 = document.getElementById("dogum").value;
+            
+            if (deger.length != "") {
+                if (deger.length != 11) {
+                    alert("Lütfen 11 haneli TC No giriniz");
+                    return false;
+                } else {
+                    if (deger2.length == 0) {
+                        const submitBtn = document.getElementById("submit");
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i><span>Lütfen Bekleyiniz...</span>';
+                        lucide.createIcons();
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // Set readonly field styles
+        document.addEventListener('DOMContentLoaded', function() {
+            const readonlyFields = ['adi', 'soyadi', 'dogum_yeri'];
+            readonlyFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.classList.add('readonly-input');
+                }
+            });
+        });
+
+        // Add floating label animation on input focus
+        document.querySelectorAll('.input-group input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
